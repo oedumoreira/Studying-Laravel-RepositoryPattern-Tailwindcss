@@ -52,6 +52,13 @@
                         </div>
                     </div>
 
+                    @if($product->cover)
+                        <div class="p-2 w-1/2">
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($product->cover) }}">
+                            <a href="{{ route('admin.product.destroyImage', $product->id) }}">Deletar imagem</a>
+                        </div>
+                    @endif
+
                     <div class="p-2 w-1/2">
                         <div class="relative">
                             <label for="name" class="leading-7 text-sm text-gray-600">Imagem de capa</label>

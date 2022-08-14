@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class AdminProductController extends Controller
@@ -36,7 +37,8 @@ class AdminProductController extends Controller
 
         $input['slug'] = Str::slug($input['name']);
 
-        if (!empty($input['cover'] && $input['cover']->isValid())) {
+        if (!empty($input['cover']) && $input['cover']->isValid()) {
+            Storage::delete($product->cover);
             $file = $input['cover'];
             $path = $file->store('public/products');
             $input['cover'] = $path;
@@ -69,7 +71,7 @@ class AdminProductController extends Controller
         ]);
         $input['slug'] = Str::slug($input['name']);
 
-        if (!empty($input['cover'] && $input['cover']->isValid())) {
+        if (!empty($input['cover']) && $input['cover']->isValid()) {
             $file = $input['cover'];
             $path = $file->store('public/products');
             $input['cover'] = $path;
@@ -78,5 +80,18 @@ class AdminProductController extends Controller
         Product::create($input);
 
         return Redirect::route('admin.products');
+    }
+
+    public function destroy(Product $product) {
+        $product->delete();
+
+        return Redirect::route('admin.products');
+    }
+
+    public function destroyImage(Product $product) {
+        Storage::delete($product->cover);
+        $product->cover = null;
+
+        return Redirect::back();
     }
 }
