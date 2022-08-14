@@ -23,9 +23,12 @@
                                 type="text" 
                                 id="name" 
                                 name="name"
-                                value="{{ $product->name }}"
+                                value="{{ old('name', $product->name) }}"
                                 class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                         </div>
+                        @error('name')
+                            <div class="text-red-400 text-sm">{{$message}}</div>
+                        @enderror
                     </div>
 
                     <div class="p-2 w-1/2">
@@ -35,9 +38,12 @@
                                 type="text" 
                                 id="price" 
                                 name="price" 
-                                value="{{ $product->price }}"
+                                value="{{ old('price', $product->price) }}"
                                 class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                         </div>
+                        @error('price')
+                            <div class="text-red-400 text-sm">{{$message}}</div>
+                        @enderror
                     </div>
 
                     <div class="p-2 w-1/2">
@@ -47,9 +53,12 @@
                                 type="text" 
                                 id="stock" 
                                 name="stock" 
-                                value="{{ $product->stock }}"
+                                value="{{ old('stock', $product->stock) }}"
                                 class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                         </div>
+                        @error('stock')
+                            <div class="text-red-400 text-sm">{{$message}}</div>
+                        @enderror
                     </div>
 
                     @if($product->cover)
@@ -57,6 +66,9 @@
                             <img src="{{ \Illuminate\Support\Facades\Storage::url($product->cover) }}">
                             <a href="{{ route('admin.product.destroyImage', $product->id) }}">Deletar imagem</a>
                         </div>
+                        @error('cover')
+                            <div class="text-red-400 text-sm">{{$message}}</div>
+                        @enderror
                     @endif
 
                     <div class="p-2 w-1/2">
@@ -69,8 +81,11 @@
                     <div class="p-2 w-full">
                         <div class="relative">
                             <label for="name" class="leading-7 text-sm text-gray-600">Descrição</label>
-                            <textarea id="description" name="description" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{ $product->description }}</textarea>
+                            <textarea id="description" name="description" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{ old('description', $product->description) }}</textarea>
                         </div>
+                        @error('description')
+                            <div class="text-red-400 text-sm">{{$message}}</div>
+                        @enderror
                     </div>
 
                     <div class="p-2 w-full">
