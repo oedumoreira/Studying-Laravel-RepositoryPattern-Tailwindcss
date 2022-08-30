@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Repositories\Contracts\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function show(Product $product)
+    public function show(ProductRepositoryInterface $model)
     {
-        return view('product', [
-            'product' => $product
-        ]);
+        $product = $model->all();
+
+        return view('product', compact('product'));
     }
 }
